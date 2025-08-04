@@ -159,6 +159,8 @@
       })
       .then(data => {
         console.log('Worker返回数据:', data);
+        // 隐藏加载状态
+        document.querySelector('.spinner').style.display = 'none';
         document.getElementById('loading').style.display = 'none';
         document.getElementById('info').style.display = '';
         
