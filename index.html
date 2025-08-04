@@ -118,7 +118,7 @@
         <div class="jump-label">即将跳转页面A：</div>
         <a class="jump-link" id="jump-link" href="https://lpsqy.pages.dev" target="_blank">https://lpsqy.pages.dev</a>
         <div class="countdown-label">倒计时：</div>
-        <div class="countdown" id="countdown">3</div>
+        <div class="countdown" id="countdown">5</div>
       </div>
     </div>
   </div>
@@ -136,10 +136,26 @@
           (data.country || '') +
           (data.region ? ' · ' + data.region : '') +
           (data.city ? ' · ' + data.city : '');
+
+        // 跳转控制逻辑
+        const jumpA = 'https://lpsqy.pages.dev';
+        const jumpB = 'https://testhtml-9fb.pages.dev';
+        let jumpUrl = jumpA;
+        let jumpLabel = '即将跳转页面A：';
+        let jumpLink = jumpA;
+        if (data.country === '美国') {
+          jumpUrl = jumpB;
+          jumpLabel = '即将跳转页面B：';
+          jumpLink = jumpB;
+        }
+        document.querySelector('.jump-label').textContent = jumpLabel;
+        const jumpLinkEl = document.getElementById('jump-link');
+        jumpLinkEl.href = jumpLink;
+        jumpLinkEl.textContent = jumpLink;
+
         // 显示跳转倒计时
         let count = 5;
         const countdownEl = document.getElementById('countdown');
-        const jumpUrl = 'https://lpsqy.pages.dev';
         countdownEl.textContent = count;
         const timer = setInterval(() => {
           count--;
