@@ -71,6 +71,33 @@
       letter-spacing: 1px;
       margin-top: 20px;
     }
+    .jump-section {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .jump-label, .countdown-label {
+      font-size: 1.08rem;
+      color: #7b8191;
+      margin-bottom: 4px;
+      margin-top: 8px;
+    }
+    .jump-link {
+      color: #3b5bdb;
+      font-size: 1.13rem;
+      text-decoration: underline;
+      margin-bottom: 10px;
+      word-break: break-all;
+    }
+    .countdown {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #e8590c;
+      margin-top: 2px;
+      margin-bottom: 0;
+      letter-spacing: 2px;
+    }
   </style>
 </head>
 <body>
@@ -82,6 +109,13 @@
       <hr class="divider">
       <div class="label">归属地是：</div>
       <div class="location" id="location"></div>
+      <hr class="divider">
+      <div class="jump-section" id="jump-section" style="margin-top:28px;">
+        <div class="jump-label">即将跳转页面A：</div>
+        <a class="jump-link" id="jump-link" href="https://lpsqy.pages.dev" target="_blank">https://lpsqy.pages.dev</a>
+        <div class="countdown-label">倒计时：</div>
+        <div class="countdown" id="countdown">3</div>
+      </div>
     </div>
   </div>
   <script>
@@ -98,6 +132,19 @@
           (data.country || '') +
           (data.region ? ' · ' + data.region : '') +
           (data.city ? ' · ' + data.city : '');
+        // 显示跳转倒计时
+        let count = 3;
+        const countdownEl = document.getElementById('countdown');
+        const jumpUrl = 'https://lpsqy.pages.dev';
+        countdownEl.textContent = count;
+        const timer = setInterval(() => {
+          count--;
+          countdownEl.textContent = count;
+          if (count <= 0) {
+            clearInterval(timer);
+            window.location.href = jumpUrl;
+          }
+        }, 1000);
       })
       .catch(() => {
         document.getElementById('loading').textContent = '获取失败，请刷新重试。';
