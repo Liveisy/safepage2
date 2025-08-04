@@ -57,8 +57,83 @@
       <div class="label">您的IP地址是：</div>
       <div class="ip" id="ip"></div>
       <hr class="divider">
-      <div class="label">归属地是：</div>
-      <div class="location" id="location"></div>
+      
+      <!-- 地理位置信息 -->
+      <div class="section-title">地理位置信息</div>
+      <div class="info-table">
+        <div class="table-row">
+          <div class="table-label">国家/地区</div>
+          <div class="table-value" id="country"></div>
+        </div>
+        <div class="table-row">
+          <div class="table-label">省份/州</div>
+          <div class="table-value" id="region"></div>
+        </div>
+        <div class="table-row">
+          <div class="table-label">城市</div>
+          <div class="table-value" id="city"></div>
+        </div>
+        <div class="table-row">
+          <div class="table-label">邮政编码</div>
+          <div class="table-value" id="zip"></div>
+        </div>
+        <div class="table-row">
+          <div class="table-label">经纬度</div>
+          <div class="table-value" id="coordinates"></div>
+        </div>
+        <div class="table-row">
+          <div class="table-label">时区</div>
+          <div class="table-value" id="timezone"></div>
+        </div>
+      </div>
+
+      <!-- 网络信息 -->
+      <div class="section-title">网络信息</div>
+      <div class="info-table">
+        <div class="table-row">
+          <div class="table-label">网络服务商</div>
+          <div class="table-value" id="isp"></div>
+        </div>
+        <div class="table-row">
+          <div class="table-label">组织名称</div>
+          <div class="table-value" id="org"></div>
+        </div>
+        <div class="table-row">
+          <div class="table-label">自治系统</div>
+          <div class="table-value" id="as"></div>
+        </div>
+        <div class="table-row">
+          <div class="table-label">AS名称</div>
+          <div class="table-value" id="asname"></div>
+        </div>
+      </div>
+
+      <!-- 域名信息 -->
+      <div class="section-title">域名信息</div>
+      <div class="info-table">
+        <div class="table-row">
+          <div class="table-label">反向DNS</div>
+          <div class="table-value" id="reverse"></div>
+        </div>
+      </div>
+
+      <!-- 网络特征 -->
+      <div class="section-title">网络特征</div>
+      <div class="info-table">
+        <div class="table-row">
+          <div class="table-label">移动网络</div>
+          <div class="table-value" id="mobile"></div>
+        </div>
+        <div class="table-row">
+          <div class="table-label">代理/VPN</div>
+          <div class="table-value" id="proxy"></div>
+        </div>
+        <div class="table-row">
+          <div class="table-label">托管服务</div>
+          <div class="table-value" id="hosting"></div>
+        </div>
+      </div>
+
       <hr class="divider">
       <div class="jump-section" id="jump-section" style="margin-top:28px;">
         <div class="jump-label">即将跳转页面A：</div>
@@ -73,6 +148,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      max-width: 100%;
     }
     .label {
       font-size: 1.15rem;
@@ -81,22 +157,58 @@
       margin-bottom: 6px;
       letter-spacing: 1px;
     }
-    .ip, .location {
+    .ip {
       font-size: 2.1rem;
       font-weight: 600;
-      color: #22223b;
-      margin-bottom: 8px;
+      color: #3b5bdb;
+      margin-bottom: 20px;
       letter-spacing: 1px;
       word-break: break-all;
-    }
-    .ip {
-      margin-bottom: 20px;
-      color: #3b5bdb;
       text-shadow: 0 2px 8px #e0e7ff;
     }
-    .location {
-      color: #4a4e69;
-      margin-bottom: 0;
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #22223b;
+      margin: 24px 0 12px 0;
+      text-align: center;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .info-table {
+      width: 100%;
+      max-width: 500px;
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .table-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .table-row:last-child {
+      border-bottom: none;
+    }
+    .table-label {
+      font-size: 0.95rem;
+      color: #64748b;
+      font-weight: 500;
+      min-width: 80px;
+    }
+    .table-value {
+      font-size: 0.95rem;
+      color: #334155;
+      font-weight: 600;
+      text-align: right;
+      word-break: break-all;
+      max-width: 60%;
     }
     .divider {
       width: 60%;
@@ -166,10 +278,20 @@
         
         // 显示IP和归属地
         document.getElementById('ip').textContent = data.ip || '未知IP';
-        document.getElementById('location').textContent =
-          (data.country || '') +
-          (data.region ? ' · ' + data.region : '') +
-          (data.city ? ' · ' + data.city : '');
+        document.getElementById('country').textContent = data.country || '未知';
+        document.getElementById('region').textContent = data.regionName || '未知';
+        document.getElementById('city').textContent = data.city || '未知';
+        document.getElementById('zip').textContent = data.zip || '未知';
+        document.getElementById('coordinates').textContent = data.lat ? `${data.lat}, ${data.lon}` : '未知';
+        document.getElementById('timezone').textContent = data.timezone || '未知';
+        document.getElementById('isp').textContent = data.isp || '未知';
+        document.getElementById('org').textContent = data.org || '未知';
+        document.getElementById('as').textContent = data.as || '未知';
+        document.getElementById('asname').textContent = data.asname || '未知';
+        document.getElementById('reverse').textContent = data.reverse || '未知';
+        document.getElementById('mobile').textContent = data.mobile ? '是' : '否';
+        document.getElementById('proxy').textContent = data.proxy ? '是' : '否';
+        document.getElementById('hosting').textContent = data.hosting ? '是' : '否';
 
         // 显示跳转信息
         const jumpLabel = `即将跳转${data.targetLabel}：`;
