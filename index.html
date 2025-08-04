@@ -18,20 +18,19 @@
       align-items: center;
       justify-content: center;
       height: 100vh;
-      padding: 10px;
+      padding: 15px;
     }
     .container {
       background: #fff;
       border-radius: 20px;
       box-shadow: 0 8px 32px rgba(60, 60, 120, 0.12), 0 1.5px 6px rgba(60, 60, 120, 0.06);
-      padding: 20px 25px;
+      padding: 25px;
       width: 95vw;
-      max-width: 800px;
+      max-width: 900px;
       height: 95vh;
-      max-height: 700px;
+      max-height: 600px;
       text-align: center;
       position: relative;
-      overflow-y: auto;
       display: flex;
       flex-direction: column;
     }
@@ -58,112 +57,98 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      max-width: 100%;
       flex: 1;
-      overflow-y: auto;
+      justify-content: space-between;
+    }
+    .ip-section {
+      margin-bottom: 15px;
     }
     .label {
       font-size: 0.9rem;
       color: #7b8191;
-      margin-top: 8px;
-      margin-bottom: 3px;
+      margin-bottom: 5px;
       letter-spacing: 1px;
     }
     .ip {
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       font-weight: 600;
       color: #3b5bdb;
-      margin-bottom: 12px;
       letter-spacing: 1px;
       word-break: break-all;
       text-shadow: 0 2px 8px #e0e7ff;
     }
-    .section-title {
-      font-size: 1rem;
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      width: 100%;
+      margin-bottom: 15px;
+    }
+    .info-card {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .card-title {
+      font-size: 0.85rem;
       font-weight: 700;
       color: #22223b;
-      margin: 12px 0 6px 0;
+      margin-bottom: 8px;
       text-align: center;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    .info-table {
-      width: 100%;
-      max-width: 100%;
-      background: #f8fafc;
-      border-radius: 8px;
-      padding: 10px;
-      margin-bottom: 6px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-    .table-row {
+    .info-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 4px 0;
-      border-bottom: 1px solid #e2e8f0;
+      padding: 3px 0;
+      font-size: 0.7rem;
     }
-    .table-row:last-child {
-      border-bottom: none;
-    }
-    .table-label {
-      font-size: 0.75rem;
+    .info-label {
       color: #64748b;
       font-weight: 500;
-      min-width: 60px;
     }
-    .table-value {
-      font-size: 0.75rem;
+    .info-value {
       color: #334155;
       font-weight: 600;
       text-align: right;
       word-break: break-all;
-      max-width: 65%;
-    }
-    .divider {
-      width: 60%;
-      height: 1px;
-      background: linear-gradient(90deg, #e0e7ff 0%, #bdbdfc 100%);
-      border: none;
-      margin: 12px auto 6px auto;
-      border-radius: 1px;
+      max-width: 60%;
     }
     .jump-section {
-      margin-top: 15px;
+      margin-top: 10px;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
     .jump-label {
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: #e53935;
       font-weight: 800;
-      margin-bottom: 3px;
-      margin-top: 6px;
+      margin-bottom: 5px;
       letter-spacing: 1px;
       text-shadow: 0 2px 12px #ffd6d6;
     }
     .jump-link {
       color: #3b5bdb;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       text-decoration: underline;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       word-break: break-all;
     }
     .countdown-label {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: #7b8191;
       margin-bottom: 3px;
-      margin-top: 6px;
     }
     .countdown {
-      font-size: 2.5rem;
+      font-size: 2rem;
       font-weight: 900;
       color: #e53935;
-      margin-top: 2px;
-      margin-bottom: 0;
       letter-spacing: 2px;
       text-shadow: 0 2px 12px #ffd6d6;
     }
@@ -174,92 +159,84 @@
     <div class="spinner"></div>
     <div class="loading" id="loading">正在根据您的IP地址跳转到相应页面...</div>
     <div class="info" id="info" style="display:none;">
-      <div class="label">您的IP地址是：</div>
-      <div class="ip" id="ip"></div>
-      <hr class="divider">
+      <div class="ip-section">
+        <div class="label">您的IP地址是：</div>
+        <div class="ip" id="ip"></div>
+      </div>
       
-      <!-- 地理位置信息 -->
-      <div class="section-title">地理位置信息</div>
-      <div class="info-table">
-        <div class="table-row">
-          <div class="table-label">国家/地区</div>
-          <div class="table-value" id="country"></div>
+      <div class="info-grid">
+        <!-- 地理位置信息 -->
+        <div class="info-card">
+          <div class="card-title">地理位置信息</div>
+          <div class="info-row">
+            <div class="info-label">国家/地区</div>
+            <div class="info-value" id="country"></div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">省份/州</div>
+            <div class="info-value" id="region"></div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">城市</div>
+            <div class="info-value" id="city"></div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">邮政编码</div>
+            <div class="info-value" id="zip"></div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">经纬度</div>
+            <div class="info-value" id="coordinates"></div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">时区</div>
+            <div class="info-value" id="timezone"></div>
+          </div>
         </div>
-        <div class="table-row">
-          <div class="table-label">省份/州</div>
-          <div class="table-value" id="region"></div>
-        </div>
-        <div class="table-row">
-          <div class="table-label">城市</div>
-          <div class="table-value" id="city"></div>
-        </div>
-        <div class="table-row">
-          <div class="table-label">邮政编码</div>
-          <div class="table-value" id="zip"></div>
-        </div>
-        <div class="table-row">
-          <div class="table-label">经纬度</div>
-          <div class="table-value" id="coordinates"></div>
-        </div>
-        <div class="table-row">
-          <div class="table-label">时区</div>
-          <div class="table-value" id="timezone"></div>
+
+        <!-- 网络信息 -->
+        <div class="info-card">
+          <div class="card-title">网络信息</div>
+          <div class="info-row">
+            <div class="info-label">网络服务商</div>
+            <div class="info-value" id="isp"></div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">组织名称</div>
+            <div class="info-value" id="org"></div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">自治系统</div>
+            <div class="info-value" id="as"></div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">AS名称</div>
+            <div class="info-value" id="asname"></div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">反向DNS</div>
+            <div class="info-value" id="reverse"></div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">移动网络</div>
+            <div class="info-value" id="mobile"></div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">代理/VPN</div>
+            <div class="info-value" id="proxy"></div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">托管服务</div>
+            <div class="info-value" id="hosting"></div>
+          </div>
         </div>
       </div>
 
-      <!-- 网络信息 -->
-      <div class="section-title">网络信息</div>
-      <div class="info-table">
-        <div class="table-row">
-          <div class="table-label">网络服务商</div>
-          <div class="table-value" id="isp"></div>
-        </div>
-        <div class="table-row">
-          <div class="table-label">组织名称</div>
-          <div class="table-value" id="org"></div>
-        </div>
-        <div class="table-row">
-          <div class="table-label">自治系统</div>
-          <div class="table-value" id="as"></div>
-        </div>
-        <div class="table-row">
-          <div class="table-label">AS名称</div>
-          <div class="table-value" id="asname"></div>
-        </div>
-      </div>
-
-      <!-- 域名信息 -->
-      <div class="section-title">域名信息</div>
-      <div class="info-table">
-        <div class="table-row">
-          <div class="table-label">反向DNS</div>
-          <div class="table-value" id="reverse"></div>
-        </div>
-      </div>
-
-      <!-- 网络特征 -->
-      <div class="section-title">网络特征</div>
-      <div class="info-table">
-        <div class="table-row">
-          <div class="table-label">移动网络</div>
-          <div class="table-value" id="mobile"></div>
-        </div>
-        <div class="table-row">
-          <div class="table-label">代理/VPN</div>
-          <div class="table-value" id="proxy"></div>
-        </div>
-        <div class="table-row">
-          <div class="table-label">托管服务</div>
-          <div class="table-value" id="hosting"></div>
-        </div>
-      </div>
-
-      <hr class="divider">
-      <div class="jump-section" id="jump-section" style="margin-top:28px;">
+      <div class="jump-section">
         <div class="jump-label">即将跳转页面A：</div>
         <a class="jump-link" id="jump-link" href="#" target="_blank">加载中...</a>
         <div class="countdown-label">倒计时：</div>
-        <div class="countdown" id="countdown">5</div>
+        <div class="countdown" id="countdown">15</div>
       </div>
     </div>
   </div>
