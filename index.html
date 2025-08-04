@@ -55,8 +55,43 @@
     <div class="loading">正在根据您的IP地址跳转到相应页面...</div>
   </div>
   <script>
-    // 直接跳转到 Worker 地址
-    window.location.href = 'https://old-salad-9be0.livesiy.workers.dev/';
+    const workerUrl = 'https://old-salad-9be0.livesiy.workers.dev/';
+    fetch(workerUrl)
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('info').style.display = '';
+        
+        // 显示IP和归属地
+        document.getElementById('ip').textContent = data.ip || '未知IP';
+        document.getElementById('location').textContent =
+          (data.country || '') +
+          (data.region ? ' · ' + data.region : '') +
+          (data.city ? ' · ' + data.city : '');
+
+        // 显示跳转信息
+        const jumpLabel = `即将跳转${data.targetLabel}：`;
+        document.querySelector('.jump-label').textContent = jumpLabel;
+        const jumpLinkEl = document.getElementById('jump-link');
+        jumpLinkEl.href = data.targetUrl;
+        jumpLinkEl.textContent = data.targetUrl;
+
+        // 显示跳转倒计时
+        let count = 5;
+        const countdownEl = document.getElementById('countdown');
+        countdownEl.textContent = count;
+        const timer = setInterval(() => {
+          count--;
+          countdownEl.textContent = count;
+          if (count <= 0) {
+            clearInterval(timer);
+            window.location.href = data.targetUrl;
+          }
+        }, 1000);
+      })
+      .catch(() => {
+        document.getElementById('loading').textContent = '获取失败，请刷新重试。';
+      });
   </script>
 </body>
 </html>
