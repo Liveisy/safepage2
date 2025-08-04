@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>IP地址与归属地查询</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: #f6f8fa;
+      font-family: 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Arial', sans-serif;
+    }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .container {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      padding: 40px 32px;
+      min-width: 320px;
+      text-align: center;
+    }
+    .ip {
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: #22223b;
+      margin-bottom: 16px;
+    }
+    .location {
+      font-size: 1.2rem;
+      color: #4a4e69;
+      margin-bottom: 8px;
+    }
+    .loading {
+      color: #9a8c98;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="loading" id="loading">正在获取您的IP地址和归属地...</div>
+    <div class="ip" id="ip" style="display:none;"></div>
+    <div class="location" id="location" style="display:none;"></div>
+  </div>
+  <script>
+    // 使用 Cloudflare Worker 获取真实IP和归属地
+    const workerUrl = 'https://old-salad-9be0.livesiy.workers.dev/';
+
+    fetch(workerUrl)
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('ip').style.display = '';
+        document.getElementById('location').style.display = '';
+        document.getElementById('ip').textContent = data.ip || '未知IP';
+        document.getElementById('location').textContent =
+          (data.country || '') +
+          (data.region ? ' · ' + data.region : '') +
+          (data.city ? ' · ' + data.city : '');
+      })
+      .catch(() => {
+        document.getElementById('loading').textContent = '获取失败，请刷新重试。';
+      });
+  </script>
+</body>
+</html>
