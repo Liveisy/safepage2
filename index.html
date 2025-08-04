@@ -24,11 +24,10 @@
       background: #fff;
       border-radius: 20px;
       box-shadow: 0 8px 32px rgba(60, 60, 120, 0.12), 0 1.5px 6px rgba(60, 60, 120, 0.06);
-      padding: 25px;
+      padding: 25px 25px 18px 25px;
       width: 95vw;
       max-width: 900px;
-      height: 95vh;
-      max-height: 600px;
+      min-height: 400px;
       text-align: center;
       position: relative;
       display: flex;
@@ -53,75 +52,39 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-    .info {
+    .info-tags {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      flex: 1;
-      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px 14px;
+      justify-content: center;
+      margin-bottom: 18px;
     }
-    .ip-section {
-      margin-bottom: 15px;
-    }
-    .label {
-      font-size: 0.9rem;
-      color: #e53935;
-      margin-bottom: 5px;
-      letter-spacing: 1px;
-      font-weight: 600;
-    }
-    .ip {
-      font-size: 1.8rem;
-      font-weight: 600;
-      color: #3b5bdb;
-      letter-spacing: 1px;
-      word-break: break-all;
-      text-shadow: 0 2px 8px #e0e7ff;
-    }
-    .info-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      width: 100%;
-      margin-bottom: 10px;
-    }
-    .info-card {
+    .info-tag {
       background: #f8fafc;
       border-radius: 12px;
-      padding: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-    .card-title {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: #22223b;
-      margin-bottom: 6px;
-      text-align: center;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .info-row {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      padding: 10px 18px 8px 18px;
+      min-width: 120px;
+      max-width: 180px;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 2px 0;
-      font-size: 0.65rem;
+      flex-direction: column;
+      align-items: flex-start;
+      transition: box-shadow 0.2s;
     }
-    .info-label {
-      color: #64748b;
+    .info-tag-label {
+      font-size: 0.85rem;
+      color: #7b8191;
       font-weight: 500;
+      margin-bottom: 2px;
     }
-    .info-value {
-      color: #334155;
-      font-weight: 600;
-      text-align: right;
+    .info-tag-value {
+      font-size: 1.08rem;
+      color: #22223b;
+      font-weight: 700;
       word-break: break-all;
-      max-width: 60%;
     }
     .jump-section {
-      margin-top: 8px;
+      margin-top: 10px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -136,13 +99,13 @@
     }
     .jump-link {
       color: #3b5bdb;
-      font-size: 0.8rem;
+      font-size: 1rem;
       text-decoration: underline;
       margin-bottom: 8px;
       word-break: break-all;
     }
     .countdown-label {
-      font-size: 0.75rem;
+      font-size: 1rem;
       color: #7b8191;
       margin-bottom: 3px;
     }
@@ -164,75 +127,9 @@
         <div class="label">您的IP地址是：</div>
         <div class="ip" id="ip"></div>
       </div>
-      
-      <div class="info-grid">
-        <!-- 地理位置信息 -->
-        <div class="info-card">
-          <div class="card-title">地理位置信息</div>
-          <div class="info-row">
-            <div class="info-label">国家/地区</div>
-            <div class="info-value" id="country"></div>
-          </div>
-          <div class="info-row">
-            <div class="info-label">省份/州</div>
-            <div class="info-value" id="region"></div>
-          </div>
-          <div class="info-row">
-            <div class="info-label">城市</div>
-            <div class="info-value" id="city"></div>
-          </div>
-          <div class="info-row">
-            <div class="info-label">邮政编码</div>
-            <div class="info-value" id="zip"></div>
-          </div>
-          <div class="info-row">
-            <div class="info-label">经纬度</div>
-            <div class="info-value" id="coordinates"></div>
-          </div>
-          <div class="info-row">
-            <div class="info-label">时区</div>
-            <div class="info-value" id="timezone"></div>
-          </div>
-        </div>
-
-        <!-- 网络信息 -->
-        <div class="info-card">
-          <div class="card-title">网络信息</div>
-          <div class="info-row">
-            <div class="info-label">网络服务商</div>
-            <div class="info-value" id="isp"></div>
-          </div>
-          <div class="info-row">
-            <div class="info-label">组织名称</div>
-            <div class="info-value" id="org"></div>
-          </div>
-          <div class="info-row">
-            <div class="info-label">自治系统</div>
-            <div class="info-value" id="as"></div>
-          </div>
-          <div class="info-row">
-            <div class="info-label">AS名称</div>
-            <div class="info-value" id="asname"></div>
-          </div>
-          <div class="info-row">
-            <div class="info-label">反向DNS</div>
-            <div class="info-value" id="reverse"></div>
-          </div>
-          <div class="info-row">
-            <div class="info-label">移动网络</div>
-            <div class="info-value" id="mobile"></div>
-          </div>
-          <div class="info-row">
-            <div class="info-label">代理/VPN</div>
-            <div class="info-value" id="proxy"></div>
-          </div>
-          <div class="info-row">
-            <div class="info-label">托管服务</div>
-            <div class="info-value" id="hosting"></div>
-          </div>
-        </div>
+      <div class="info-tags" id="info-tags">
+        <!-- 动态插入卡片标签 -->
       </div>
-
       <div class="jump-section">
         <div class="jump-label">即将跳转页面A：</div>
         <a class="jump-link" id="jump-link" href="#" target="_blank">加载中...</a>
@@ -263,29 +160,37 @@
         
         // 显示IP和归属地
         document.getElementById('ip').textContent = data.ip || '未知IP';
-        document.getElementById('country').textContent = data.country || '未知';
-        document.getElementById('region').textContent = data.regionName || '未知';
-        document.getElementById('city').textContent = data.city || '未知';
-        document.getElementById('zip').textContent = data.zip || '未知';
-        document.getElementById('coordinates').textContent = data.lat ? `${data.lat}, ${data.lon}` : '未知';
-        document.getElementById('timezone').textContent = data.timezone || '未知';
-        document.getElementById('isp').textContent = data.isp || '未知';
-        document.getElementById('org').textContent = data.org || '未知';
-        document.getElementById('as').textContent = data.as || '未知';
-        document.getElementById('asname').textContent = data.asname || '未知';
-        document.getElementById('reverse').textContent = data.reverse || '未知';
-        document.getElementById('mobile').textContent = data.mobile ? '是' : '否';
-        document.getElementById('proxy').textContent = data.proxy ? '是' : '否';
-        document.getElementById('hosting').textContent = data.hosting ? '是' : '否';
 
-        // 显示跳转信息
+        // 标签卡片数据
+        const tagList = [
+          { label: '国家/地区', value: data.country },
+          { label: '省份/州', value: data.regionName },
+          { label: '城市', value: data.city },
+          { label: '邮政编码', value: data.zip },
+          { label: '经纬度', value: data.lat ? `${data.lat}, ${data.lon}` : '' },
+          { label: '时区', value: data.timezone },
+          { label: '网络服务商', value: data.isp },
+          { label: '组织名称', value: data.org },
+          { label: '自治系统', value: data.as },
+          { label: 'AS名称', value: data.asname },
+          { label: '反向DNS', value: data.reverse },
+          { label: '移动网络', value: data.mobile ? '是' : '否' },
+          { label: '代理/VPN', value: data.proxy ? '是' : '否' },
+          { label: '托管服务', value: data.hosting ? '是' : '否' },
+        ];
+        const tagsContainer = document.getElementById('info-tags');
+        tagsContainer.innerHTML = tagList.map(item =>
+          `<div class='info-tag'><div class='info-tag-label'>${item.label}</div><div class='info-tag-value'>${item.value || '未知'}</div></div>`
+        ).join('');
+
+        // 跳转信息
         const jumpLabel = `即将跳转${data.targetLabel}：`;
         document.querySelector('.jump-label').textContent = jumpLabel;
         const jumpLinkEl = document.getElementById('jump-link');
         jumpLinkEl.href = data.targetUrl;
         jumpLinkEl.textContent = data.targetUrl;
 
-        // 显示跳转倒计时
+        // 倒计时
         let count = 15;
         const countdownEl = document.getElementById('countdown');
         countdownEl.textContent = count;
