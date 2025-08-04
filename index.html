@@ -56,9 +56,19 @@
   </div>
   <script>
     const workerUrl = 'https://old-salad-9be0.livesiy.workers.dev/';
+    
+    console.log('开始请求Worker:', workerUrl);
+    
     fetch(workerUrl)
-      .then(response => response.json())
+      .then(response => {
+        console.log('Worker响应状态:', response.status);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
       .then(data => {
+        console.log('Worker返回数据:', data);
         document.getElementById('loading').style.display = 'none';
         document.getElementById('info').style.display = '';
         
@@ -89,8 +99,15 @@
           }
         }, 1000);
       })
-      .catch(() => {
-        document.getElementById('loading').textContent = '获取失败，请刷新重试。';
+      .catch((error) => {
+        console.error('请求失败:', error);
+        document.getElementById('loading').innerHTML = `
+          <div style="color: #e53935; margin-bottom: 10px;">请求失败</div>
+          <div style="font-size: 0.9rem; color: #666;">错误信息: ${error.message}</div>
+          <div style="margin-top: 15px;">
+            <button onclick="location.reload()" style="padding: 8px 16px; background: #3b5bdb; color: white; border: none; border-radius: 6px; cursor: pointer;">重试</button>
+          </div>
+        `;
       });
   </script>
 </body>
